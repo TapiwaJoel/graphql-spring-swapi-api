@@ -14,8 +14,11 @@ public class PeopleQuery implements GraphQLQueryResolver {
         this.searchInterface = searchInterface;
     }
 
-    public Response people() {
-        return searchInterface.getPeople(0);
+    public Response people(String next) {
+        return searchInterface.getPeople(next);
     }
 
+    public Response search(String name) {
+        return searchInterface.searchByName(name);
+    }
 }

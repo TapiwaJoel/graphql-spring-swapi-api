@@ -1,6 +1,6 @@
 type Query {
-    firstQuery : String
-    people : Response
+    people(next : String) : Response
+    search(name : String) : Response
 }
 
 type Response {

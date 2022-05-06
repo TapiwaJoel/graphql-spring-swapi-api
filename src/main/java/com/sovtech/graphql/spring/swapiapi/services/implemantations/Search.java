@@ -1,10 +1,12 @@
 package com.sovtech.graphql.spring.swapiapi.services.implemantations;
 
 import com.sovtech.graphql.spring.swapiapi.services.interfaces.SearchInterface;
+import com.sovtech.graphql.spring.swapiapi.utils.QueryStrings;
 import com.sovtech.graphql.spring.swapiapi.utils.Response;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 public class Search implements SearchInterface {
@@ -19,12 +21,31 @@ public class Search implements SearchInterface {
     }
 
     @Override
-    public Response getPeople(int page) {
-        return restTemplate.getForObject(swapiUrl, Response.class);
+    public Response getPeople(String next) {
+        return restTemplate.getForObject(buildUri(
+                QueryStrings.Page,
+                next == null ? "1" : next
+                ),
+                Response.class);
     }
 
     @Override
     public Response searchByName(String name) {
-        return null;
+        return restTemplate.getForObject(
+                buildUri(QueryStrings.Search, name),
+                Response.class);
+    }
+
+    private String buildUri(QueryStrings key, String value) {
+        try {
+            String param = key == QueryStrings.Page ?
+                    QueryStrings.Page.toString() : QueryStrings.Search.toString();
+            return UriComponentsBuilder.fromHttpUrl(swapiUrl)
+                    .queryParam(param.toLowerCase(), value).build().toUriString();
+
+        } catch (IllegalArgumentException illegalArgumentException) {
+            illegalArgumentException.printStackTrace();
+            return swapiUrl;
+        }
     }
 }
