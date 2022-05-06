@@ -1,12 +1,12 @@
 package com.sovtech.graphql.spring.swapiapi.utils;
 
 public enum QueryStrings {
-    Page("page"),
-    Search("search");
+    page("page"),
+    search("search");
 
     public final String label;
 
-    private QueryStrings(String label) {
+    QueryStrings(String label) {
         this.label = label;
     }
 }

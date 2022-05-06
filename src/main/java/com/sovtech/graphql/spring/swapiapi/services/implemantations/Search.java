@@ -23,7 +23,7 @@ public class Search implements SearchInterface {
     @Override
     public Response getPeople(String next) {
         return restTemplate.getForObject(buildUri(
-                QueryStrings.Page,
+                QueryStrings.page,
                 next == null ? "1" : next
                 ),
                 Response.class);
@@ -32,14 +32,14 @@ public class Search implements SearchInterface {
     @Override
     public Response searchByName(String name) {
         return restTemplate.getForObject(
-                buildUri(QueryStrings.Search, name),
+                buildUri(QueryStrings.search, name),
                 Response.class);
     }
 
     private String buildUri(QueryStrings key, String value) {
         try {
-            String param = key == QueryStrings.Page ?
-                    QueryStrings.Page.toString() : QueryStrings.Search.toString();
+            String param = key == QueryStrings.page ?
+                    QueryStrings.page.toString() : QueryStrings.search.toString();
             return UriComponentsBuilder.fromHttpUrl(swapiUrl)
                     .queryParam(param.toLowerCase(), value).build().toUriString();
 
