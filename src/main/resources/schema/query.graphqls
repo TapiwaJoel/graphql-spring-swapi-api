@@ -1,5 +1,5 @@
 type Query {
-    people(next : String) : Response
+    people(page : String) : Response
     search(name : String) : Response
 }
 

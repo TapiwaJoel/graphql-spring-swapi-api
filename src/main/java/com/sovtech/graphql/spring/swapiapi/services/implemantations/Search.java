@@ -21,10 +21,10 @@ public class Search implements SearchInterface {
     }
 
     @Override
-    public Response getPeople(String next) {
+    public Response getPeople(String page) {
         return restTemplate.getForObject(buildUri(
                 QueryStrings.page,
-                next == null ? "1" : next
+                page == null ? "1" : page
                 ),
                 Response.class);
     }
