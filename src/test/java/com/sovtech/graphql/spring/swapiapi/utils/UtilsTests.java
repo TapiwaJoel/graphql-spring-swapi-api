@@ -23,7 +23,6 @@ public class UtilsTests {
     @Test
     void buildUriShouldReturnCorrectUrlWhenSearchIsEntered() {
         String searchUri = Utils.buildUri(QueryStrings.search, "Luke Skywalker", swapiUrl, swapiUrl);
-        System.out.println(searchUri);
         assertThat(searchUri).isEqualTo(swapiUrl + "?search=Luke Skywalker");
     }
 

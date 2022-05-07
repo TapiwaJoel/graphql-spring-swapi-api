@@ -1,5 +1,6 @@
 package com.sovtech.graphql.spring.swapiapi.services;
 
+import com.sovtech.graphql.spring.swapiapi.services.interfaces.SearchInterface;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class SearchTests {
 
     @Autowired
     MockMvc mockMvc;
+
+    @Autowired
+    SearchInterface searchInterface;
 
 //    @Test
 
